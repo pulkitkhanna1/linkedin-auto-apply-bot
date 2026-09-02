@@ -24,27 +24,27 @@ version:    26.01.20.5.08
 default_resume_path = "all resumes/default/resume.pdf"      # (In Development)
 
 # What do you want to answer for questions that ask about years of experience you have, this is different from current_experience? 
-years_of_experience = "5"          # A number in quotes Eg: "0","1","2","3","4", etc.
+years_of_experience = "2"          # A number in quotes Eg: "0","1","2","3","4", etc.
 
 # Do you need visa sponsorship now or in future?
 require_visa = "No"               # "Yes" or "No"
 
 # What is the link to your portfolio website, leave it empty as "", if you want to leave this question unanswered
-website = "https://github.com/GodsScion"                        # "www.example.bio" or "" and so on....
+website = "https://github.com/pulkitkhanna1"                        # "www.example.bio" or "" and so on....
 
 # Please provide the link to your LinkedIn profile.
-linkedIn = "https://www.linkedin.com/in/saivigneshgolla/"       # "https://www.linkedin.com/in/example" or "" and so on...
+linkedIn = "https://www.linkedin.com/in/pulkit-khanna"       # "https://www.linkedin.com/in/example" or "" and so on...
 
 # What is the status of your citizenship? # If left empty as "", tool will not answer the question. However, note that some companies make it compulsory to be answered
 # Valid options are: "U.S. Citizen/Permanent Resident", "Non-citizen allowed to work for any employer", "Non-citizen allowed to work for current employer", "Non-citizen seeking work authorization", "Canadian Citizen/Permanent Resident" or "Other"
-us_citizenship = "U.S. Citizen/Permanent Resident"
+us_citizenship = "Other"
 
 
 
 ## SOME ANNOYING QUESTIONS BY COMPANIES 🫠 ##
 
 # What to enter in your desired salary question (American and European), What is your expected CTC (South Asian and others)?, only enter in numbers as some companies only allow numbers,
-desired_salary = 1200000          # 80000, 90000, 100000 or 120000 and so on... Do NOT use quotes
+desired_salary = 2500000          # 80000, 90000, 100000 or 120000 and so on... Do NOT use quotes
 '''
 Note: If question has the word "lakhs" in it (Example: What is your expected CTC in lakhs), 
 then it will add '.' before last 5 digits and answer. Examples: 
@@ -56,7 +56,7 @@ And if asked in months, then it will divide by 12 and answer. Examples:
 '''
 
 # What is your current CTC? Some companies make it compulsory to be answered in numbers...
-current_ctc = 800000            # 800000, 900000, 1000000 or 1200000 and so on... Do NOT use quotes
+current_ctc = 1800000            # 800000, 900000, 1000000 or 1200000 and so on... Do NOT use quotes
 '''
 Note: If question has the word "lakhs" in it (Example: What is your current CTC in lakhs), 
 then it will add '.' before last 5 digits and answer. Examples: 
@@ -84,12 +84,11 @@ then it will divide by 30 or 7 and answer respectively. Examples:
 '''
 
 # Your LinkedIn headline in quotes Eg: "Software Engineer @ Google, Masters in Computer Science", "Recent Grad Student @ MIT, Computer Science"
-linkedin_headline = "Full Stack Developer with Masters in Computer Science and 4+ years of experience" # "Headline" or "" to leave this question unanswered
+linkedin_headline = "Program Manager @ Pocket FM | ex-Bain & Co | Growth Strategy & Product" # "Headline" or "" to leave this question unanswered
 
 # Your summary in quotes, use \n to add line breaks if using single quotes "Summary".You can skip \n if using triple quotes """Summary"""
 linkedin_summary = """
-I'm a Senior Software Engineer at Amazon with Masters in CS and 4+ years of experience in developing and maintaining Full Stack Web applications and cloud solutions. 
-Specialized in React, Node.js, and Python.
+Program & Growth Manager who scaled a U.S. vertical from $80M to $120M ARR while independently managing $1.5M+ in monthly ad spend at Pocket FM. Combines operating experience with Bain consulting rigor and D2C founder background. Strong at funnel optimization, performance marketing, cross-functional program leadership, and AI-driven content production.
 """
 
 '''
@@ -98,23 +97,45 @@ Note: If left empty as "", the tool will not answer the question. However, note 
 
 # Your cover letter in quotes, use \n to add line breaks if using single quotes "Cover Letter".You can skip \n if using triple quotes """Cover Letter""" (This question makes sense though)
 cover_letter = """
-Cover Letter
+Dear Hiring Team,
+
+I am writing to express my strong interest in joining your team. As a Program & Growth Manager at Pocket FM, I scaled a U.S. vertical from $80M to $120M ARR while independently managing over $1.5M in monthly performance ad spend. Prior to Pocket FM, I worked at Bain & Company as an Analyst Intern conducting strategic CEO diagnostic frameworks, founded a profitable D2C brand (Reherb.in), and built scalable growth funnels at Newton School.
+
+With a strong foundation in B.Tech Production Engineering from DTU (8.4/10 CGPA), data analytics (SQL, Python, Advanced Excel, Power BI), and cross-functional execution, I look forward to bringing high-velocity growth and operational excellence to your team.
+
+Thank you for your consideration.
+
+Best regards,
+Pulkit Khanna
++91 7042680055 | pulkitkhanna1@gmail.com
 """
 # Information about you that the AI can use when answering application questions.
 # Put anything an answer might need here, for example: name, years of experience,
 # key skills, location, work authorization, and so on. Use \n for line breaks.
 user_information_all = """
-User Information
+Name: Pulkit Khanna
+Email: pulkitkhanna1@gmail.com
+Phone: +91 7042680055
+Location: New Delhi, India
+Education: B.Tech in Production Engineering, Delhi Technological University (DTU), 2021-2025, CGPA 8.40/10; Sardar Patel Vidyalaya (CBSE Class XII 93.6%)
+Current Role: Program Manager, US Fantasy Growth at Pocket FM (Jun 2025 - Present)
+Past Experience:
+- Analyst Intern, Strategy Consulting at Bain & Company (Jan 2025 - Jun 2025)
+- CEO Office Intern at 30 Sundays Club (Sep 2024 - Oct 2024)
+- Growth Intern at Newton School (Jun 2024 - Aug 2024)
+- Founder & CEO at Reherb.in (Dec 2023 - Jun 2024)
+Core Skills: Program Management, Growth Strategy, Performance Marketing, Funnel Optimization, GTM Strategy, A/B Testing, ASO & Paid UA, Cross-functional Leadership, AI Content Ops, SQL, Python, Power BI, Advanced Excel, Figma.
+Achievements: 2nd place Worldwide HPAIR 2026 (Harvard), Semi-finalist BrAINwars 2024 (Bain & Company), Led team building code editor for 20k+ students.
 """
 '''
 Note: If left empty as "", the tool will not answer the question. However, note that some companies make it compulsory to be answered. Use \n to add line breaks.
 ''' 
 
 # Name of your most recent employer
-recent_employer = "Not Applicable" # "", "Lala Company", "Google", "Snowflake", "Databricks"
+recent_employer = "Pocket FM" # "", "Lala Company", "Google", "Snowflake", "Databricks"
 
 # Example question: "On a scale of 1-10 how much experience do you have building web or mobile applications? 1 being very little or only in school, 10 being that you have built and launched applications to real users"
-confidence_level = "8"             # Any number between "1" to "10" including 1 and 10, put it in quotes ""
+confidence_level = "9"             # Any number between "1" to "10" including 1 and 10, put it in quotes ""
 ##
 
 
