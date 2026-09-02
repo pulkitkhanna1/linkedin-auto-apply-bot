@@ -1088,6 +1088,36 @@ def apply_to_jobs(search_terms: list[str]) -> None:
                     else:   external_jobs_count += 1
                     applied_jobs.add(job_id)
 
+                    # Auto Cold Message Recruiter the moment the job is applied
+                    try:
+                        import config.settings as current_settings
+                        if getattr(current_settings, "auto_cold_message_recruiter", True) and hr_link and hr_link != "Unknown" and hr_link.startswith("http"):
+                            print_lg(f"\n🤝 [AUTO COLD OUTREACH]: Contacting job poster ({hr_name}) for '{title}' at '{company}'...")
+                            main_tab = driver.current_window_handle
+                            driver.switch_to.new_window('tab')
+                            try:
+                                from modules.linkedin_outreach import LinkedInOutreach
+                                from modules.cold_message_generator import ColdMessageGenerator
+                                outreach_handler = LinkedInOutreach(driver=driver, message_generator=ColdMessageGenerator(ai_client=aiClient))
+                                outreach_handler.send_connection_request(
+                                    profile_url=hr_link,
+                                    recruiter_name=hr_name,
+                                    company=company,
+                                    target_role=title,
+                                    pause_before_send=pause_before_submit
+                                )
+                            except Exception as outreach_inner_err:
+                                print_lg(f"Outreach notice: {outreach_inner_err}")
+                            finally:
+                                try:
+                                    driver.close()
+                                    driver.switch_to.window(main_tab)
+                                except Exception:
+                                    pass
+                                time.sleep(1)
+                    except Exception as outreach_e:
+                        print_lg(f"Could not complete auto-outreach for job {job_id}: {outreach_e}")
+
 
 
                 # Switching to next page

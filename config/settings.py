@@ -28,12 +28,8 @@ Note: RECOMMENDED TO LEAVE IT AS `True`, if you set it `False`, be sure to CLOSE
 # Follow easy applied companies
 follow_companies = False            # True or False, Note: True or False are case-sensitive
 
-## Upcoming features (In Development)
-# # Send connection requests to HR's 
-# connect_hr = True                  # True or False, Note: True or False are case-sensitive
-
-# # What message do you want to send during connection request? (Max. 200 Characters)
-# connect_request_message = ""       # Leave Empty to send connection request without personalized invitation (recommended to leave it empty, since you only get 10 per month without LinkedIn Premium*)
+# Automatically send AI cold message / connection note to the recruiter the moment you apply for the job
+auto_cold_message_recruiter = True   # True or False (Groq AI powered outreach to job posters)
 
 # Do you want the program to run continuously until you stop it? (Beta)
 run_non_stop = False                # True or False, Note: True or False are case-sensitive

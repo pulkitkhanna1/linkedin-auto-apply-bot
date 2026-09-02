@@ -16,16 +16,16 @@ if not os.path.exists(VENV_PYTHON):
 
 
 def banner():
-    print("\n" + "="*65)
+    print("\n" + "="*70)
     print("      🚀 PULKIT'S LINKEDIN & JOB APPLICATION AUTOMATION SUITE")
-    print("="*65)
-    print("  [1] 🤖 LinkedIn Easy Apply Bot (Web Control Panel / Auto-Applier)")
+    print("="*70)
+    print("  [1] 🤖 Unified Job Applier + Instant Recruiter Outreach (Applies & Messages)")
     print("  [2] 📝 Google Forms Auto-Applier (LinkedIn Hiring Posts & Forms)")
-    print("  [3] 🤝 Recruiter Cold Outreach Bot (AI Personalized InMails & Notes)")
-    print("  [4] 🏃 Run LinkedIn Easy Apply directly in Terminal (CLI Mode)")
+    print("  [3] 🤝 Standalone Recruiter Search & Outreach (Company Search / Profile List)")
+    print("  [4] 🌐 Launch Web Control Panel (Browser GUI at http://127.0.0.1:5000)")
     print("  [5] 📊 View Applied Jobs & Outreach History (CSV Summary)")
     print("  [0] ❌ Exit")
-    print("="*65)
+    print("="*70)
 
 
 def view_history_summary():
@@ -56,17 +56,17 @@ def main():
             break
 
         if choice == "1":
-            print("\nStarting Web Control Panel at http://127.0.0.1:5000 ...")
-            subprocess.run([VENV_PYTHON, "app.py"])
+            print("\n🚀 Starting Unified Bot: Applying to Jobs + Instant AI Recruiter Outreach...")
+            subprocess.run([VENV_PYTHON, "runAiBot.py"])
         elif choice == "2":
             print("\nStarting Google Forms Auto-Applier...")
             subprocess.run([VENV_PYTHON, "runGoogleFormsBot.py"])
         elif choice == "3":
-            print("\nStarting Recruiter Cold Outreach Bot...")
+            print("\nStarting Standalone Recruiter Cold Outreach Bot...")
             subprocess.run([VENV_PYTHON, "runColdOutreachBot.py"])
         elif choice == "4":
-            print("\nRunning LinkedIn Easy Apply Bot directly in terminal...")
-            subprocess.run([VENV_PYTHON, "runAiBot.py"])
+            print("\nStarting Web Control Panel at http://127.0.0.1:5000 ...")
+            subprocess.run([VENV_PYTHON, "app.py"])
         elif choice == "5":
             view_history_summary()
         elif choice == "0":
