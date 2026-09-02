@@ -78,13 +78,15 @@ def _resolve_provider(name: Optional[str]) -> str:
 def _msg_text(message) -> str:
     '''Extract plain text from a LangChain message (handles str content and content-block lists).'''
     text = getattr(message, "text", None)
-    if callable(text):
-        try:
-            text = text()
-        except Exception:
-            text = None
     if isinstance(text, str) and text:
         return text
+    if callable(text):
+        try:
+            res = text()
+            if isinstance(res, str) and res:
+                return res
+        except Exception:
+            pass
     content = getattr(message, "content", "")
     if isinstance(content, str):
         return content
