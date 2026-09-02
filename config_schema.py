@@ -49,6 +49,7 @@ Field types:
 # models often. Local models (Ollama / LM Studio) use the "openai" provider.
 AI_MODELS = {
     "openai": [
+        "qwen/qwen3.6-27b", "openai/gpt-oss-120b", "groq/compound",
         "gpt-4o", "gpt-4o-mini", "gpt-4.1", "gpt-4.1-mini", "o4-mini",
         "gpt-5", "gpt-5-mini",
         "llama-3.2-3b-instruct", "qwen2.5:latest",
