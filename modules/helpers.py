@@ -247,3 +247,54 @@ def truncate_for_csv(data, max_length: int = 131000, suffix: str = "...[TRUNCATE
         return f"[could not stringify value: {e}]"
 
 
+def ensure_linkedin_login(driver, user=None, pwd=None) -> bool:
+    '''Ensure LinkedIn session is active. If not, automatically log in with stored credentials or prompt user.'''
+    from selenium.webdriver.common.by import By
+    import config.secrets as secrets_cfg
+
+    u = user or getattr(secrets_cfg, "username", "")
+    p = pwd or getattr(secrets_cfg, "password", "")
+
+    try:
+        print_lg("Checking LinkedIn login status...")
+        driver.get("https://www.linkedin.com/feed/")
+        sleep(2.5)
+
+        current_url = driver.current_url.lower()
+        if "feed" in current_url or "/mynetwork" in current_url or "/jobs" in current_url:
+            print_lg("✅ Already logged in to LinkedIn!")
+            return True
+
+        # If on login page or redirected to authwall
+        driver.get("https://www.linkedin.com/login")
+        sleep(2)
+
+        if u and p and u != "username@example.com":
+            print_lg(f"Attempting login for {u}...")
+            try:
+                user_field = driver.find_element(By.ID, "username")
+                user_field.clear()
+                user_field.send_keys(u)
+                pwd_field = driver.find_element(By.ID, "password")
+                pwd_field.clear()
+                pwd_field.send_keys(p)
+                sleep(0.5)
+                driver.find_element(By.XPATH, '//button[@type="submit" and contains(text(), "Sign in")]').click()
+                sleep(3)
+            except Exception as e:
+                print_lg(f"Could not auto-fill login fields: {e}")
+
+        # Wait up to 10 seconds for feed redirect or user interaction
+        for _ in range(10):
+            if "feed" in driver.current_url.lower() or "search" in driver.current_url.lower():
+                print_lg("✅ LinkedIn login confirmed!")
+                return True
+            sleep(1)
+
+        print_lg("⚠️ Please complete login in the Chrome browser window if prompted.")
+        return True
+    except Exception as e:
+        print_lg(f"Login check notice: {e}")
+        return False
+
+

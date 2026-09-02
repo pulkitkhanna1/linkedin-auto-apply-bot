@@ -10,7 +10,7 @@ import sys
 import argparse
 import time
 
-from modules.helpers import print_lg
+from modules.helpers import print_lg, ensure_linkedin_login
 from modules.open_chrome import createChromeSession
 from modules.ai.connections import create_ai_client
 from modules.google_form_filler import GoogleFormFiller
@@ -45,10 +45,13 @@ def main():
         print_lg("❌ Could not launch Chrome driver. Exiting.")
         sys.exit(1)
 
-    # 2. Initialize Groq AI Client
+    # 2. Check LinkedIn Authentication
+    ensure_linkedin_login(driver)
+
+    # 3. Initialize Groq AI Client
     ai_client = create_ai_client()
 
-    # 3. Initialize Form Filler and Scraper
+    # 4. Initialize Form Filler and Scraper
     filler = GoogleFormFiller(driver=driver, ai_client=ai_client)
     scraper = LinkedInPostsScraper(driver=driver)
 
@@ -69,29 +72,9 @@ def main():
             driver.quit()
             sys.exit(1)
     else:
-        # Default / Interactive: Scrape LinkedIn posts or ask user
-        print_lg("1. Scrape LinkedIn hiring posts for Google Forms")
-        print_lg("2. Paste a specific Google Form URL")
-        
-        # If running non-interactively or with --scrape-posts
-        if args.scrape_posts:
-            choice = "1"
-        else:
-            try:
-                choice = input("\nEnter choice (1 or 2) [Default: 1]: ").strip() or "1"
-            except Exception:
-                choice = "1"
-
-        if choice == "2":
-            try:
-                single_url = input("Enter Google Form URL: ").strip()
-                if single_url:
-                    forms_to_process.append({"url": single_url, "role": "Manual Entry", "snippet": ""})
-            except Exception:
-                pass
-        else:
-            print_lg("\nStarting LinkedIn posts scanner for hiring Google Forms...")
-            forms_to_process = scraper.scrape_posts_for_forms()
+        # Default: Immediately start searching LinkedIn hiring posts for Google Forms
+        print_lg("\n🔍 Searching LinkedIn feed and hiring posts for Google Forms matching your target roles...")
+        forms_to_process = scraper.scrape_posts_for_forms()
 
     if not forms_to_process:
         print_lg("\nNo Google Forms to process. Exiting.")

@@ -10,7 +10,7 @@ import sys
 import argparse
 import time
 
-from modules.helpers import print_lg
+from modules.helpers import print_lg, ensure_linkedin_login
 from modules.open_chrome import createChromeSession
 from modules.ai.connections import create_ai_client
 from modules.cold_message_generator import ColdMessageGenerator
@@ -49,7 +49,10 @@ def main():
         print_lg("❌ Could not launch Chrome driver. Exiting.")
         sys.exit(1)
 
-    # 2. Initialize AI Generator and Outreach Handler
+    # 2. Check LinkedIn Authentication
+    ensure_linkedin_login(driver)
+
+    # 3. Initialize AI Generator and Outreach Handler
     ai_client = create_ai_client()
     generator = ColdMessageGenerator(ai_client=ai_client)
     outreach = LinkedInOutreach(driver=driver, message_generator=generator)
