@@ -187,3 +187,26 @@ Given my background in data-driven growth funnels and cross-functional leadershi
 Best regards,
 Pulkit Khanna
 +91 7042680055 | https://www.linkedin.com/in/pulkit-khanna"""
+
+    def generate_email_draft(
+        self,
+        recruiter_name: str = "",
+        company: str = "",
+        target_role: str = "Program / Growth Manager",
+        job_title: str = ""
+    ) -> tuple[str, str]:
+        '''
+        Generate an email subject and body for recruiter outreach.
+        '''
+        first_name = recruiter_name.split()[0] if recruiter_name else "there"
+        role_mention = job_title or target_role
+        company_mention = f" @ {company}" if company else ""
+        subject = f"Application & Interest: {role_mention}{company_mention} - Pulkit Khanna"
+
+        body = self.generate_direct_message(
+            recruiter_name=recruiter_name,
+            company=company,
+            target_role=target_role,
+            job_title=job_title
+        )
+        return subject, body

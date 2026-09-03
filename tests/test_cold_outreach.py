@@ -100,3 +100,43 @@ def test_recruiter_history_and_deduplication(tmp_path, monkeypatch):
 
     assert is_recruiter_already_contacted(sample_url)
     assert is_recruiter_already_contacted(sample_url + "/?miniProfileUrn=...")
+
+
+def test_email_draft_generation():
+    generator = ColdMessageGenerator(use_ai=False)
+    subject, body = generator.generate_email_draft(
+        recruiter_name="Muskan Khandelwal",
+        company="upGrad",
+        target_role="Program Manager"
+    )
+
+    assert "Application & Interest" in subject
+    assert "Program Manager" in subject
+    assert "upGrad" in subject
+    assert "Pulkit Khanna" in subject
+    assert "Muskan" in body
+    assert "Pocket FM" in body
+
+
+def test_recruiter_email_logging(tmp_path, monkeypatch):
+    from modules.linkedin_outreach import log_recruiter_email, EMAIL_OUTREACH_FILE
+    test_email_csv = str(tmp_path / "test_emails.csv")
+    monkeypatch.setattr("modules.linkedin_outreach.EMAIL_OUTREACH_FILE", test_email_csv)
+
+    log_recruiter_email(
+        name="Muskan Khandelwal",
+        company="upGrad",
+        role="Program Manager",
+        email="muskan@upgrad.com",
+        subject="Application & Interest",
+        body="Hi Muskan, ...",
+        profile_url="https://www.linkedin.com/in/muskan-khandelwal",
+        status="Drafted"
+    )
+
+    assert os.path.exists(test_email_csv)
+    with open(test_email_csv, "r", encoding="utf-8") as f:
+        content = f.read()
+        assert "muskan@upgrad.com" in content
+        assert "upGrad" in content
+        assert "Program Manager" in content

@@ -31,6 +31,12 @@ follow_companies = False            # True or False, Note: True or False are cas
 # Automatically send AI cold message / connection note to the recruiter the moment you apply for the job
 auto_cold_message_recruiter = True   # True or False (Groq AI powered outreach to job posters)
 
+# Protect paid InMail credits: Do NOT spend InMail credits on 2nd/3rd connections, send free direct message only to 1st connections / Open Profiles
+protect_inmail_credits = True        # True or False (Prevents consuming InMail credits)
+
+# Automatically check Recruiter's Contact Info for direct email address if not connected
+extract_recruiter_email = True       # True or False (Extracts email and logs/drafts email outreach)
+
 # Do you want the program to run continuously until you stop it? (Beta)
 run_non_stop = False                # True or False, Note: True or False are case-sensitive
 '''

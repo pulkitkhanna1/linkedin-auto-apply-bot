@@ -250,6 +250,10 @@ SCHEMA = [
                "Pause and wait for you when the tool can't confidently answer a question. If off, it answers randomly. Ignored when 'Run in background' is on."),
             _f("Run settings", "settings", "auto_cold_message_recruiter", "Auto-message recruiter after applying", "bool",
                "Automatically draft and send a personalized AI connection note / message to the job poster / recruiter the moment an application is submitted."),
+            _f("Run settings", "settings", "protect_inmail_credits", "Protect paid InMail credits", "bool",
+               "Do not spend paid InMail credits on 2nd/3rd connections. Only send direct messages to 1st connections or free Open Profiles, falling back to connection notes or direct email."),
+            _f("Run settings", "settings", "extract_recruiter_email", "Extract recruiter email from Contact Info", "bool",
+               "Check recruiter's LinkedIn Contact Info for email address and prepare email outreach."),
             # --- advanced run options ---
             _f("Run settings", "settings", "auto_manage_driver", "Manage Chrome driver automatically", "bool",
                "Let the tool download and match the right Chrome driver for you. Recommended on so you don't have to install it yourself.", advanced=True),
