@@ -29,12 +29,45 @@ def main():
 
     pause_before_submit = not args.no_pause and getattr(q_cfg, "pause_before_submit", True)
 
-    print_lg("\n" + "="*60)
-    print_lg("🚀 GOOGLE FORMS AUTO-APPLY BOT (POWERED BY GROQ AI)")
-    print_lg("="*60 + "\n")
+    target_url = args.url
+    file_path = args.file
+    auto_scrape = args.scrape_posts
 
-    # 1. Initialize Chrome Browser
-    print_lg("Launching Chrome browser...")
+    if not target_url and not file_path and not auto_scrape:
+        print("\n" + "="*65)
+        print("📝 GOOGLE FORMS JOB AUTO-APPLY ENGINE (POWERED BY GROQ AI)")
+        print("="*65)
+        print("  [1] 🔍 Search LinkedIn Hiring Posts for Google Forms (Auto-Scrape & Apply)")
+        print("  [2] 📋 Paste a Google Form Link (e.g. https://forms.gle/...) and Auto-Apply")
+        print("  [3] 📁 Batch Apply from a Text File of Google Form URLs")
+        print("  [0] ❌ Cancel & Return")
+        print("="*65)
+
+        try:
+            choice = input("\n👉 Enter option (0-3) [Default: 1]: ").strip() or "1"
+        except (KeyboardInterrupt, EOFError):
+            print("\nCancelled.")
+            return
+
+        if choice == "0":
+            return
+        elif choice == "2":
+            try:
+                target_url = input("\n👉 Enter Google Form URL (e.g. https://forms.gle/...): ").strip()
+            except (KeyboardInterrupt, EOFError):
+                return
+            if not target_url:
+                print("No URL provided. Exiting.")
+                return
+        elif choice == "3":
+            try:
+                file_path = input("\n👉 Enter path to text file containing links: ").strip()
+            except (KeyboardInterrupt, EOFError):
+                return
+        else:
+            auto_scrape = True
+
+    print_lg("\nLaunching Chrome browser...")
     try:
         options, driver, actions, wait = createChromeSession()
     except Exception as e:
@@ -45,34 +78,34 @@ def main():
         print_lg("❌ Could not launch Chrome driver. Exiting.")
         sys.exit(1)
 
-    # 2. Check LinkedIn Authentication
-    ensure_linkedin_login(driver)
+    # 1. Check LinkedIn Authentication if scraping posts
+    if auto_scrape:
+        ensure_linkedin_login(driver)
 
-    # 3. Initialize Groq AI Client
+    # 2. Initialize Groq AI Client
     ai_client = create_ai_client()
 
-    # 4. Initialize Form Filler and Scraper
+    # 3. Initialize Form Filler and Scraper
     filler = GoogleFormFiller(driver=driver, ai_client=ai_client)
     scraper = LinkedInPostsScraper(driver=driver)
 
     forms_to_process = []
 
     # Decide Mode
-    if args.url:
-        forms_to_process.append({"url": args.url.strip(), "role": "Direct URL", "snippet": ""})
-    elif args.file:
+    if target_url:
+        forms_to_process.append({"url": target_url, "role": "Direct URL", "snippet": ""})
+    elif file_path:
         try:
-            with open(args.file, "r", encoding="utf-8") as f:
+            with open(file_path, "r", encoding="utf-8") as f:
                 for line in f:
                     u = line.strip()
                     if u and ("forms.gle" in u or "docs.google.com/forms" in u):
                         forms_to_process.append({"url": u, "role": "File Input", "snippet": ""})
         except Exception as e:
-            print_lg(f"Error reading file {args.file}: {e}")
+            print_lg(f"Error reading file {file_path}: {e}")
             driver.quit()
             sys.exit(1)
     else:
-        # Default: Immediately start searching LinkedIn hiring posts for Google Forms
         print_lg("\n🔍 Searching LinkedIn feed and hiring posts for Google Forms matching your target roles...")
         forms_to_process = scraper.scrape_posts_for_forms()
 

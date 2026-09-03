@@ -32,8 +32,7 @@ class LinkedInPostsScraper:
 
     def build_search_url(self, role_title: str) -> str:
         '''Build LinkedIn content search URL with date filter.'''
-        # Query: ("hiring" OR "we are hiring" OR "apply") AND ("forms.gle" OR "docs.google.com/forms") AND ("<role_title>")
-        query = f'("hiring" OR "we are hiring" OR "apply here") AND ("forms.gle" OR "docs.google.com/forms") AND ("{role_title}")'
+        query = f'"{role_title}" ("forms.gle" OR "google form" OR "application form" OR "hiring")'
         encoded_query = urllib.parse.quote(query)
         url = f"https://www.linkedin.com/search/results/content/?keywords={encoded_query}&sortBy=%22date_posted%22"
         return url
