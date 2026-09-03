@@ -65,8 +65,10 @@ def main():
             print("\nStarting Standalone Recruiter Cold Outreach Bot...")
             subprocess.run([VENV_PYTHON, "runColdOutreachBot.py"])
         elif choice == "4":
-            print("\nStarting Web Control Panel at http://127.0.0.1:5000 ...")
-            subprocess.run([VENV_PYTHON, "app.py"])
+            print("\n🌐 Starting Web Control Panel and opening browser at http://127.0.0.1:5000 ...")
+            env = os.environ.copy()
+            env["PANEL_OPEN_BROWSER"] = "1"
+            subprocess.run([VENV_PYTHON, "app.py"], env=env)
         elif choice == "5":
             view_history_summary()
         elif choice == "0":
