@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ApplyPilot AI - Settings & Profile</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <div class="brand">
+        <span class="brand-icon">🚀</span>
+        <div>
+          <h1>ApplyPilot AI Settings</h1>
+          <p>Configure your candidate profile, AI engine, and LinkedIn automation rules.</p>
+        </div>
+      </div>
+      <button class="btn btn-save" id="btn-save-top">💾 Save Settings</button>
+    </header>
+
+    <div class="grid-layout">
+      <!-- AI Engine Configuration -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-icon">🧠</span>
+          <h2>Groq & AI Engine</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="llm_api_key">Groq / OpenAI API Key</label>
+            <input type="password" id="llm_api_key" placeholder="gsk_..." />
+            <small>Get a free, ultra-fast API key at <a href="https://console.groq.com/keys" target="_blank">console.groq.com</a></small>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="llm_model">AI Model</label>
+              <input type="text" id="llm_model" value="qwen/qwen3.6-27b" />
+            </div>
+            <div class="form-group">
+              <label for="llm_api_url">API Base URL</label>
+              <input type="text" id="llm_api_url" value="https://api.groq.com/openai/v1" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Candidate Profile -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-icon">👤</span>
+          <h2>Candidate Profile</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first_name">First Name</label>
+              <input type="text" id="first_name" />
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last Name</label>
+              <input type="text" id="last_name" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" />
+            </div>
+            <div class="form-group">
+              <label for="phone_number">Phone Number</label>
+              <input type="tel" id="phone_number" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="current_city">Current City</label>
+              <input type="text" id="current_city" />
+            </div>
+            <div class="form-group">
+              <label for="state">State / Province</label>
+              <input type="text" id="state" />
+            </div>
+            <div class="form-group">
+              <label for="country">Country</label>
+              <input type="text" id="country" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="years_of_experience">Current Experience (Years)</label>
+              <input type="number" id="years_of_experience" min="0" max="40" />
+            </div>
+            <div class="form-group">
+              <label for="max_experience_target">Apply to roles requiring up to (Years)</label>
+              <input type="number" id="max_experience_target" value="5" min="0" max="40" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="require_visa">Need Visa Sponsorship?</label>
+              <select id="require_visa">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="desired_salary">Desired Salary ($ / yr)</label>
+              <input type="text" id="desired_salary" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="recent_employer">Recent / Current Employer</label>
+            <input type="text" id="recent_employer" placeholder="e.g. Pocket FM" />
+          </div>
+
+          <div class="form-group">
+            <label for="linkedin_headline">LinkedIn Headline</label>
+            <input type="text" id="linkedin_headline" placeholder="e.g. Program Manager @ Pocket FM | ex-Bain & Co" />
+          </div>
+
+          <div class="form-group">
+            <label for="linkedin_summary">Executive Summary & Key Highlights (Used for AI Outreach Notes)</label>
+            <textarea id="linkedin_summary" rows="4"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Automation & Recruiter Outreach Rules -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-icon">⚡</span>
+          <h2>Automation & InMail Rules</h2>
+        </div>
+        <div class="card-body">
+          <div class="toggle-group">
+            <label class="toggle">
+              <input type="checkbox" id="auto_cold_message_recruiter" checked />
+              <span class="slider"></span>
+            </label>
+            <div>
+              <div class="toggle-title">Instant Recruiter Outreach</div>
+              <div class="toggle-desc">Automatically draft and send a personalized connection note to the job poster upon applying.</div>
+            </div>
+          </div>
+
+          <div class="toggle-group">
+            <label class="toggle">
+              <input type="checkbox" id="protect_inmail_credits" checked />
+              <span class="slider"></span>
+            </label>
+            <div>
+              <div class="toggle-title">Protect InMail Credits</div>
+              <div class="toggle-desc">Never spend paid InMail credits; send free connection notes and 1st-degree direct messages only.</div>
+            </div>
+          </div>
+
+          <div class="toggle-group">
+            <label class="toggle">
+              <input type="checkbox" id="pause_before_submit" />
+              <span class="slider"></span>
+            </label>
+            <div>
+              <div class="toggle-title">Pause Before Final Submit</div>
+              <div class="toggle-desc">Allow 5 seconds for manual review before clicking the final submit button on applications.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-actions">
+      <button class="btn btn-save" id="btn-save-bottom">💾 Save All Settings</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Settings saved successfully!</div>
+  <script src="options.js"></script>
+</body>
+</html>

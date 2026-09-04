@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ApplyPilot AI</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <div class="header">
+      <div class="brand">
+        <div class="brand-icon">🚀</div>
+        <div>
+          <div class="brand-name">ApplyPilot AI</div>
+          <div class="brand-subtitle">Smart LinkedIn & Forms Automation</div>
+        </div>
+      </div>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span>Ready</span>
+      </div>
+    </div>
+
+    <div class="stats-card">
+      <div class="stat-item">
+        <div class="stat-value" id="stat-applied">0</div>
+        <div class="stat-label">Easy Applied</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-value" id="stat-recruiters">0</div>
+        <div class="stat-label">Recruiter Notes</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="btn-start-tab">
+        <span class="btn-icon">▶</span>
+        <span>Run on Active Tab</span>
+      </button>
+
+      <button class="btn btn-secondary" id="btn-open-linkedin">
+        <span class="btn-icon">🔍</span>
+        <span>Open LinkedIn Jobs</span>
+      </button>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" id="btn-export-csv">
+          <span>📥 Export CSV</span>
+        </button>
+        <button class="btn btn-outline" id="btn-settings">
+          <span>⚙️ Settings</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Powered by Groq AI • v1.0.0</span>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

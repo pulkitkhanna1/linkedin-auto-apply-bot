@@ -1,0 +1,82 @@
+{
+  "manifest_version": 3,
+  "name": "ApplyPilot AI - LinkedIn Auto-Apply & Cold Outreach",
+  "version": "1.0.0",
+  "description": "Automate LinkedIn Easy Apply, instant AI recruiter outreach notes, and Google Forms with Groq & OpenAI.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://www.linkedin.com/*",
+    "https://docs.google.com/forms/*",
+    "https://forms.gle/*",
+    "https://api.groq.com/*",
+    "https://api.openai.com/*"
+  ],
+  "background": {
+    "service_worker": "background/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "options/options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/jobs/*",
+        "https://www.linkedin.com/search/results/people/*",
+        "https://www.linkedin.com/in/*"
+      ],
+      "css": [
+        "content/overlay.css"
+      ],
+      "js": [
+        "content/overlay.js",
+        "content/linkedin_apply.js",
+        "content/linkedin_outreach.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://docs.google.com/forms/*",
+        "https://forms.gle/*"
+      ],
+      "css": [
+        "content/overlay.css"
+      ],
+      "js": [
+        "content/overlay.js",
+        "content/google_forms.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/*",
+        "content/overlay.css"
+      ],
+      "matches": [
+        "https://www.linkedin.com/*",
+        "https://docs.google.com/*",
+        "https://forms.gle/*"
+      ]
+    }
+  ]
+}
